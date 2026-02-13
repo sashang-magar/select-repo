@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Will You Be My Valentine?</title>
     <style>
       * {
@@ -11,9 +11,11 @@
         box-sizing: border-box;
       }
       video {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
+        width: 300px;
+        height: 220px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
       }
 
       body {
@@ -177,10 +179,51 @@
           opacity: 1;
         }
       }
+      /* 📱 Mobile Responsive */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px 15px;
+          width: 95%;
+        }
+
+        h1 {
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+
+        .buttons {
+          flex-direction: column; /* stack buttons vertically */
+          gap: 12px;
+        }
+
+        button {
+          width: 100%; /* full width */
+          font-size: 16px; /* smaller text */
+          padding: 10px;
+        }
+
+        video {
+          width: 90%; 
+          height: auto; 
+          max-height: 220px; 
+          margin-top: 15px;
+        }
+
+        #feedbackMessage {
+          font-size: 18px;
+        }
+
+        .celebration {
+          font-size: 40px;
+        }
+
+        .success-message {
+          font-size: 24px;
+        }
+      }
     </style>
   </head>
   <body>
-    
     <!-- First -->
     <div class="container" id="questionContainer">
       <h1>Will you be my Valentine? 💕</h1>
@@ -194,9 +237,10 @@
     <div class="container hidden" id="successContainer">
       <div class="celebration">🎉🎊</div>
       <div class="success-message">Yay! 💕</div>
-      <h1>Okay… I’m officially smiling like an idiot right now 😄
-        I’m really happy you said yes… 
-        💑</h1> 
+      <h1>
+        Okay… I’m officially smiling like an idiot right now 😄 I’m really happy
+        you said yes… 💑
+      </h1>
       <p
         style="
           font-size: 18px;
@@ -223,10 +267,8 @@
     </div>
 
     <!-- Third -->
-     <div class="container hidden" id="foodQuestionContainer">
-      <h1>Nice choice 😄
-          Now the important question…
-          What are we eating? 🍽️</h1>
+    <div class="container hidden" id="foodQuestionContainer">
+      <h1>Nice choice 😄 Now the important question… What are we eating? 🍽️</h1>
 
       <div class="buttons">
         <button id="foodOption1">🍽️ Creamy mushroom pasta</button>
@@ -235,16 +277,12 @@
       </div>
     </div>
     <!-- Fourth -->
-     <div class="container hidden" id="finalContainer">
-      <h1>Date Confirmed 💕
-        Now I’m officially excited 😄
-        See you soon 💑✨</h1>
-        
-      
+    <div class="container hidden" id="finalContainer">
+      <h1>Date Confirmed 💕 Now I’m officially excited 😄 See you soon 💑✨</h1>
     </div>
 
     <script>
-    //   for YES and moving NO
+      //   for YES and moving NO
       const noBtn = document.getElementById("noBtn");
       const yesBtn = document.getElementById("yesBtn");
       const questionContainer = document.getElementById("questionContainer");
@@ -325,7 +363,7 @@
         dateQuestionContainer.classList.remove("hidden");
       });
 
-      //After selecting Where to go      
+      //After selecting Where to go
       //option1
       const dateOption1 = document.getElementById("dateOption1");
       const foodQuestionContainer = document.getElementById(
@@ -347,12 +385,10 @@
         dateQuestionContainer.classList.add("hidden");
         foodQuestionContainer.classList.remove("hidden");
       });
-      //After selecting Where to eat      
+      //After selecting Where to eat
       //option1
       const foodOption1 = document.getElementById("foodOption1");
-      const finalContainer = document.getElementById(
-        "finalContainer",
-      );
+      const finalContainer = document.getElementById("finalContainer");
       foodOption1.addEventListener("click", () => {
         foodQuestionContainer.classList.add("hidden");
         finalContainer.classList.remove("hidden");
@@ -369,7 +405,6 @@
         foodQuestionContainer.classList.add("hidden");
         finalContainer.classList.remove("hidden");
       });
-
     </script>
   </body>
 </html>
