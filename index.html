@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Be My Valentine?</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 60px 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+      }
+
+      .container.hidden {
+        display: none;
+      }
+
+      video {
+        margin-top: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 30px;
+        color: #ff1493;
+        margin-bottom: 40px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .buttons {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 15px 40px;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      #yesBtn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 50px;
+      }
+
+      #yesBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      #yesBtn:active {
+        transform: scale(0.95);
+      }
+
+      #noBtn {
+        background: #ff6b6b;
+        color: white;
+        position: relative;
+      }
+
+      #noBtn:hover {
+        background: #ff5252;
+      }
+
+      .celebration {
+        font-size: 60px;
+        margin: 20px 0;
+      }
+
+      .success-message {
+        font-size: 32px;
+        color: #ff1493;
+        font-weight: bold;
+        margin: 20px 0;
+        animation: bounce 0.6s ease-in-out;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .heart {
+        position: fixed;
+        pointer-events: none;
+        animation: float-up 2s ease-in forwards;
+        font-size: 30px;
+      }
+
+      @keyframes float-up {
+        0% {
+          opacity: 1;
+          transform: translateY(0) translateX(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-300px) translateX(100px) scale(0.5);
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-20px);
+        }
+        75% {
+          transform: translateX(20px);
+        }
+      }
+
+      .shake {
+        animation: shake 0.3s ease-in-out;
+      }
+
+      #feedbackMessage {
+        font-size: 24px;
+        color: #ff1493;
+        font-weight: bold;
+        margin-top: 10px;
+        height: 30px;
+        min-height: 30px;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- First -->
+    <div class="container" id="questionContainer">
+      <h1>Will you be my Valentine? 💕</h1>
+      <div id="feedbackMessage"></div>
+      <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </div>
+    </div>
+
+    <div class="container hidden" id="successContainer">
+      <div class="celebration">🎉🎊</div>
+      <div class="success-message">Yay! 💕</div>
+      <h1>Okay… I’m officially smiling like an idiot right now 😄
+        I’m really happy you said yes… 
+        💑</h1> 
+      <p
+        style="
+          font-size: 18px;
+          color: #ff1493;
+          margin-top: 30px;
+          font-weight: bold;
+        "
+      ></p>
+      <video width="300" height="220" autoplay muted loop playsinline>
+        <source src="falling.mp4" type="video/mp4" />
+      </video>
+      <button id="nextBtn" style="margin-top: 20px">Next ➡️</button>
+    </div>
+
+    <!-- Second -->
+    <div class="container hidden" id="dateQuestionContainer">
+      <h1>Where should we go? 💕</h1>
+
+      <div class="buttons">
+        <button id="dateOption1">🍽️ Dinner Date</button>
+        <button id="dateOption2">🎬 Movie Night</button>
+        <button id="dateOption3">☕ Coffee + Walk</button>
+      </div>
+    </div>
+
+    <!-- Third -->
+     <div class="container hidden" id="foodQuestionContainer">
+      <h1>Nice choice 😄
+          Now the important question…
+          What are we eating? 🍽️</h1>
+
+      <div class="buttons">
+        <button id="foodOption1">🍽️ Creamy mushroom pasta</button>
+        <button id="foodOption2">🍕 Vegan Pizza</button>
+        <button id="foodOption3">🍪 Chocolate Cheesecake</button>
+      </div>
+    </div>
+    <!-- Fourth -->
+     <div class="container hidden" id="finalContainer">
+      <h1>Date Confirmed 💕
+        Now I’m officially excited 😄
+        See you soon 💑✨</h1>
+        
+      
+    </div>
+
+    <script>
+    //   for YES and moving NO
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const questionContainer = document.getElementById("questionContainer");
+      const successContainer = document.getElementById("successContainer");
+      const feedbackMessage = document.getElementById("feedbackMessage");
+
+      let noClickCount = 0;
+      const messages = [
+        "Oops 😜",
+        "Try again",
+        "Not today",
+        "Nice try! 😄",
+        "Keep trying!",
+        "You miss 100% of the shots you don't take 🙏",
+      ];
+
+      // Function to move the NO button randomly
+      function moveNoButton() {
+        const randomX = Math.random() * (window.innerWidth - 100);
+        const randomY = Math.random() * (window.innerHeight - 100);
+
+        noBtn.style.position = "fixed";
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+
+        // Display random message
+        const randomMessage =
+          messages[Math.floor(Math.random() * messages.length)];
+        feedbackMessage.textContent = randomMessage;
+      }
+
+      // Hover event for NO button
+      noBtn.addEventListener("mouseenter", () => {
+        moveNoButton();
+      });
+
+      // Click event for NO button
+      noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        noClickCount++;
+        moveNoButton();
+
+        // Add shake animation to the entire container
+        questionContainer.classList.add("shake");
+        setTimeout(() => {
+          questionContainer.classList.remove("shake");
+        }, 300);
+      });
+
+      // YES button click event
+      yesBtn.addEventListener("click", () => {
+        questionContainer.classList.add("hidden");
+        successContainer.classList.remove("hidden");
+
+        // Generate hearts
+        for (let i = 0; i < 30; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.textContent = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = window.innerHeight + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 2000);
+          }, i * 50);
+        }
+      });
+
+      // After clicking Next button
+      const nextBtn = document.getElementById("nextBtn");
+      const dateQuestionContainer = document.getElementById(
+        "dateQuestionContainer",
+      );
+
+      nextBtn.addEventListener("click", () => {
+        successContainer.classList.add("hidden");
+        dateQuestionContainer.classList.remove("hidden");
+      });
+
+      //After selecting Where to go      
+      //option1
+      const dateOption1 = document.getElementById("dateOption1");
+      const foodQuestionContainer = document.getElementById(
+        "foodQuestionContainer",
+      );
+      dateOption1.addEventListener("click", () => {
+        dateQuestionContainer.classList.add("hidden");
+        foodQuestionContainer.classList.remove("hidden");
+      });
+      //option2
+      const dateOption2 = document.getElementById("dateOption2");
+      dateOption2.addEventListener("click", () => {
+        dateQuestionContainer.classList.add("hidden");
+        foodQuestionContainer.classList.remove("hidden");
+      });
+      //option3
+      const dateOption3 = document.getElementById("dateOption3");
+      dateOption3.addEventListener("click", () => {
+        dateQuestionContainer.classList.add("hidden");
+        foodQuestionContainer.classList.remove("hidden");
+      });
+      //After selecting Where to eat      
+      //option1
+      const foodOption1 = document.getElementById("foodOption1");
+      const finalContainer = document.getElementById(
+        "finalContainer",
+      );
+      foodOption1.addEventListener("click", () => {
+        foodQuestionContainer.classList.add("hidden");
+        finalContainer.classList.remove("hidden");
+      });
+      //option2
+      const foodOption2 = document.getElementById("foodOption2");
+      foodOption2.addEventListener("click", () => {
+        foodQuestionContainer.classList.add("hidden");
+        finalContainer.classList.remove("hidden");
+      });
+      //option3
+      const foodOption3 = document.getElementById("foodOption3");
+      foodOption3.addEventListener("click", () => {
+        foodQuestionContainer.classList.add("hidden");
+        finalContainer.classList.remove("hidden");
+      });
+
+    </script>
+  </body>
+</html>
